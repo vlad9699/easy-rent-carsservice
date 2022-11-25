@@ -16,7 +16,7 @@ const corsOption = {
   origin: process.env.ALLOWED_ORIGINS,
 };
 
-app.use(cors(corsOption));
+app.use(cors());
 
 
 const sendMail = async (data) => {
