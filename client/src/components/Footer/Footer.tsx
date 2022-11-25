@@ -1,9 +1,8 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-import LogoFooter from '../../assets/logo-footer.svg'
-import { Link } from "react-router-dom";
-import TelegramIcon from '../../assets/telegram-icon.svg'
-import Wahtsupcon from '../../assets/whatsup-icon.svg'
+import LogoFooter from "../../assets/logo-footer.svg";
+import TelegramIcon from "../../assets/telegram-icon.svg";
+import Wahtsupcon from "../../assets/whatsup-icon.svg";
 
 const Footer = () => {
   return (
@@ -14,12 +13,12 @@ const Footer = () => {
           easyrent.carservice@gmail.com
         </Typography>
         <Box display={"flex"} gap={"32px"}>
-          <Link to={'https://google.com'}>
+          <Box component={"a"} href={"tg://resolve?domain=easyrent_car"} target={"_blank"}>
             <img src={TelegramIcon} alt="telegram" />
-          </Link>
-          <Link to={'https://google.com'}>
+          </Box>
+          <Box component={"a"} href={"https://wa.me/message/GT2JQOFW4D6HC1"}>
             <img src={Wahtsupcon} alt="whatsup" />
-          </Link>
+          </Box>
         </Box>
       </Box>
     </Box>

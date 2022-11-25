@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import MainPage from "./pages/MainPage/MainPage";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "./utils/theme";
@@ -9,7 +9,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <Routes>
         <Route path={"/"} element={<MainPage />} />
-        <Route path={"*"} element={<h1>NOT FOUND</h1>} />
+        <Route path={"*"} element={<Navigate to={"/"} />} />
       </Routes>
     </ThemeProvider>
   );

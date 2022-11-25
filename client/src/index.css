@@ -8,6 +8,12 @@ body,
     font-family: Montserrat, sans-serif !important;
 }
 
+input:-webkit-autofill, input:-webkit-autofill:focus {
+    -webkit-transition: background-color 600000s 0s, color 600000s 0s;
+    transition: background-color 600000s 0s, color 600000s 0s;
+    background: transparent !important;
+}
+
 * {
     box-sizing: border-box
 }

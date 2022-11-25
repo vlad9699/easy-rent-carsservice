@@ -9,14 +9,13 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import Logo from "../../assets/logo.svg";
 import { useResponsive } from "../../hooks/useResponsive";
 import LogoFooter from "../../assets/logo-footer.svg";
 import TelegramIcon from "../../assets/telegram-icon.svg";
 import Wahtsupcon from "../../assets/whatsup-icon.svg";
 import BurgerIcon from "../../assets/burger-icon.svg";
-import { Link, Button, Element, Events, animateScroll as scroll, scrollSpy, scroller } from "react-scroll";
+import { Link } from "react-scroll";
 import style from "./Header.module.css";
 
 
@@ -25,12 +24,12 @@ const navItems = [
   { name: "Home", to: "toHome" },
   { name: "How to rent", to: "toSimpleSteps", offset: -100 },
   { name: "About us", to: "toAboutUs" },
-  { name: "Contac", to: "toContact", offset: -670 },
+  { name: "Contact", to: "toContact", offset: -670 },
 ];
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { isMobile, isTablet } = useResponsive();
+  const { isMobile } = useResponsive();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -61,12 +60,12 @@ export default function Header() {
         ))}
         <ListItem disablePadding sx={{ justifyContent: "center", marginTop: "30px" }}>
           <Box display={"flex"} gap={"32px"}>
-            <Link to={"https://google.com"}>
+            <Box component={"a"} href={"tg://resolve?domain=easyrent_car"} target={"_blank"}>
               <img src={TelegramIcon} alt="telegram" />
-            </Link>
-            <Link to={"https://google.com"}>
+            </Box>
+            <Box component={"a"} href={"https://wa.me/message/GT2JQOFW4D6HC1"}>
               <img src={Wahtsupcon} alt="whatsup" />
-            </Link>
+            </Box>
           </Box>
         </ListItem>
       </List>

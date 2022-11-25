@@ -3,6 +3,7 @@ import DatePicker from "react-datepicker";
 import styles from "./DataInput.module.css";
 import { Box, InputAdornment, TextField } from "@mui/material";
 import DateRangeIcon from "@mui/icons-material/DateRange";
+import { useResponsive } from "../../../hooks/useResponsive";
 
 export type PropsWithClassName<P> = P & { className?: string };
 
@@ -38,6 +39,7 @@ const DataInput = (
     helperText
   }: DateInputProps,
 ) => {
+  const { isMobile } = useResponsive();
 
   const changeHandler = (date: Date) => {
     if (onChange) onChange(date);
@@ -47,10 +49,9 @@ const DataInput = (
     return (
       <TextField
         {...props}
-        // sx={{ width: "260px" }}
+        sx={!isMobile ?{ width: "260px"} : { width: "100%" }}
         error={error}
         helperText={helperText}
-        fullWidth
         InputProps={{
           endAdornment:
             <InputAdornment position="end">

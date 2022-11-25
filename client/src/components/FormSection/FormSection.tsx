@@ -1,5 +1,5 @@
-import React from "react";
-import { Box, Button, InputLabel, TextField, Typography } from "@mui/material";
+import React, { useState } from "react";
+import { Box, Button, CircularProgress, InputLabel, TextField, Typography } from "@mui/material";
 import style from "./FromSection.module.css";
 import LocationPopover from "./LocationPopover/LocationPopover";
 import DataInput from "./DataInput/DataInput";
@@ -7,37 +7,56 @@ import { useFormik } from "formik";
 import moment from "moment";
 import { FormSchema } from "./validationSchema";
 import { useResponsive } from "../../hooks/useResponsive";
-import emailjs from "@emailjs/browser";
+import { IForm, sendEmailRequest } from "../../api/api";
+import SendModal from "../Shared/Modal/SendModal";
 
 
 const FormSection = () => {
   const { isMobile } = useResponsive();
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
+  const [isData, setIsData] = useState<boolean | null>(null);
 
-  const submitForm = async (value: any) => {
-    console.log(33333, value);
+  const handleCloseModal = () => {
+    setOpen(false);
+    setIsData(null);
+  };
 
-    const formData: any = {
-      fromDate: moment(new Date(value.fromDate)).format("YYYY-MM-DD"),
-      toDate: moment(new Date(value.toDate)).format("YYYY-MM-DD"),
+  const submitForm = async (value: IForm) => {
+
+    const formData = {
+      locationUp: value.locationUp,
+      fromDate: moment(new Date(value?.fromDate)).format("YYYY-MM-DD"),
+      locationOff: value.locationOff,
+      toDate: moment(new Date(value?.toDate)).format("YYYY-MM-DD"),
       age: value.age,
       phone: value.phone,
       name: value.name,
     };
-    emailjs.send("service_z69mj1n", "template_02mcm22", formData, "8t-Dwg15gmocR6T8S")
-      .then((result) => {
-        console.log(6666666,result.text);
-      }, (error) => {
-        console.log(error.text);
-      });
-    formik.resetForm();
+
+    try {
+      setLoading(true);
+      const res = await sendEmailRequest(formData);
+      if (res) {
+        setOpen(true);
+        setIsData(true);
+        formik.resetForm();
+      }
+    } catch (e) {
+      console.log(e);
+      setOpen(true);
+      setIsData(false);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const formik = useFormik({
     initialValues: {
       locationUp: null,
-      fromDate: null,
+      fromDate: "",
       locationOff: null,
-      toDate: null,
+      toDate: "",
       age: "",
       phone: "",
       name: "",
@@ -45,6 +64,11 @@ const FormSection = () => {
     validationSchema: FormSchema,
     onSubmit: submitForm,
   });
+
+  const setFormatValue = (v: any) => {
+    if (v.target.value && !v.target.value.includes("+")) v.target.value = "+" + v.target.value;
+    formik.setFieldValue("phone", v.target.value);
+  };
 
   return (
     <Box>
@@ -59,13 +83,13 @@ const FormSection = () => {
         <Box component={"form"} onSubmit={formik.handleSubmit} display={"flex"}
              justifyContent={isMobile ? "center" : "space-between"}
              flexWrap={"wrap"} mt={"24px"}>
-          <Box mb={"20px"} flexBasis={isMobile ? "100%" : ''}>
+          <Box mb={"20px"} flexBasis={isMobile ? "100%" : ""}>
             <InputLabel className={style.formLabel}>Pick-up location</InputLabel>
             <LocationPopover
               formik={formik}
               value={formik.values.locationUp}
               handleChange={(e: any) => formik.setFieldValue("locationUp", e)}
-            />
+                />
           </Box>
           <Box flexBasis={isMobile ? "100%" : ""}>
             <InputLabel className={style.formLabel}>Pick-up date</InputLabel>
@@ -79,7 +103,7 @@ const FormSection = () => {
               helperText={formik.touched.fromDate && formik.errors.fromDate ? formik.touched.fromDate && formik.errors.fromDate : " "}
             />
           </Box>
-          <Box mb={"20px"} flexBasis={isMobile ? "100%" : ''}>
+          <Box mb={"20px"} flexBasis={isMobile ? "100%" : ""}>
             <InputLabel className={style.formLabel}>Drop-off location</InputLabel>
             <LocationPopover
               formik={formik}
@@ -128,7 +152,12 @@ const FormSection = () => {
               type="text"
               placeholder={"+"}
               value={formik.values.phone.trim()}
-              onChange={formik.handleChange}
+              onChange={setFormatValue}
+              onKeyPress={(event) => {
+                if (!/[0-9]/.test(event.key)) {
+                  event.preventDefault();
+                }
+              }}
               error={Boolean(formik.errors.phone && formik.touched.phone)}
               helperText={formik.touched.phone && formik.errors.phone ? formik.touched.phone && formik.errors.phone : " "}
             />
@@ -148,18 +177,18 @@ const FormSection = () => {
             />
           </Box>
           <Box mt={isMobile ? "24px" : ""} flexBasis={isMobile ? "100%" : ""} display={"flex"}
-               alignItems={{ sm: "flex-end", lg: "center" }}>
+               alignItems={isMobile ? "flex-end" : "center"}>
             <Button
               sx={!isMobile ? { width: "260px", height: "48px" } : { width: "100%", height: "48px" }}
               variant={"contained"}
               type={"submit"}
             >
-              Go to live chat!
+              {!loading ? "Go to live chat!" : <CircularProgress size={30} style={{ color: "#fff" }} />}
             </Button>
           </Box>
-
         </Box>
       </Box>
+      <SendModal open={open} res={isData} handleClose={handleCloseModal} />
     </Box>
   );
 };
