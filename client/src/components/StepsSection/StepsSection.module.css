@@ -1,0 +1,12 @@
+.box {
+    display: flex;
+    justify-content: center;
+}
+
+@media (max-width: 767px) {
+    .box {
+        align-items: center;
+        flex-direction: column;
+        gap: 40px;
+    }
+}
