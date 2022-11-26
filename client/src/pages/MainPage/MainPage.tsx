@@ -1,8 +1,8 @@
 import React from "react";
 import { Box, Container } from "@mui/material";
 import Header from "../../components/Header/Header";
-import Car from "../../assets/main.png";
-import CarMob from "../../assets/test.png";
+import Car from "../../assets/main.webp";
+import CarMob from "../../assets/test.webp";
 import TitleSection from "../../components/TitleSection/TitleSection";
 import FormSection from "../../components/FormSection/FormSection";
 import StepsSection from "../../components/StepsSection/StepsSection";

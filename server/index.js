@@ -52,7 +52,7 @@ You got a new <i>message</i> from <strong>Easy Rent Cars Service</strong>.<br><b
   if (result) return result;
 };
 
-app.post("/form",
+app.post("/api/form",
   body(["locationUp", "locationOff", "fromDate", "toDate", "age", "phone", "name"]).exists(),
   async (req, res, next) => {
 
