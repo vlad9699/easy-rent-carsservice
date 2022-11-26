@@ -22,7 +22,7 @@ const DifferentSection = () => {
              borderRadius={"20px"} p={"32px 23px"} width={"316px"}>
           <img style={{ marginBottom: "10px" }} src={DollarIcon} alt="dollar" />
           <Typography fontSize={"18px"} fontWeight={500} textAlign={"center"}>
-            BEST PRICEx
+            BEST PRICE
           </Typography>
           <Typography fontSize={"16px"} fontWeight={500} maxWidth={"270px"} textAlign={"center"} color={"#6A6A6A"}>
             We provide -30% off the rental price
