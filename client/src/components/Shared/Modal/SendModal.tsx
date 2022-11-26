@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Modal, Typography } from "@mui/material";
-import SmileIcon from '../../../assets/smile-icon.svg'
+import SmileIcon from '../../../assets/smile-icon.png'
 import SadIcon from '../../../assets/sad-icon.svg'
 
 type SendModalProps = {

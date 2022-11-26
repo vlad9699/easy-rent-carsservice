@@ -42,10 +42,10 @@ const DifferentSection = () => {
              borderRadius={"20px"} p={"32px 23px"} width={"316px"}>
           <img style={{ marginBottom: "10px" }} src={ServiceIcon} alt="service" />
           <Typography fontSize={"18px"} fontWeight={500} textAlign={"center"}>
-            ALL CARS IN GOOD CONDITION
+            ALL CARS ARE IN GREAT CONDITION
           </Typography>
           <Typography fontSize={"16px"} fontWeight={500} maxWidth={"270px"} textAlign={"center"} color={"#6A6A6A"}>
-            Our cars are regularly serviced
+            Our cars are regularly serviced and maintained
           </Typography>
         </Box>
 

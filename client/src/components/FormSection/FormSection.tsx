@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button, CircularProgress, InputLabel, TextField, Typography } from "@mui/material";
 import style from "./FromSection.module.css";
 import LocationPopover from "./LocationPopover/LocationPopover";
@@ -51,6 +51,14 @@ const FormSection = () => {
     }
   };
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (isData) return window.location.href = "https://wa.me/message/GT2JQOFW4D6HC1";
+    }, 1200);
+
+    return () => clearTimeout(timeout);
+  }, [isData]);
+
   const formik = useFormik({
     initialValues: {
       locationUp: null,
@@ -75,7 +83,7 @@ const FormSection = () => {
       <Box className={style.formContainer} mt={isMobile ? "110px" : "140px"}>
         <Typography component={"h2"} fontWeight={500} fontSize={isMobile ? "20px" : "24px"} mb={"5px"}
                     textAlign={isMobile ? "center" : "left"}>
-          <span style={{ color: "#FD790D" }}>BOOK</span> YOUR NEXT LONG DRIVE NOW!
+          <span style={{ color: "#FD790D" }}>BOOK</span> YOUR NEXT RENT NOW!
         </Typography>
         <Typography fontSize={isMobile ? "14px" : "16px"} color={"#6A6A6A"} textAlign={isMobile ? "center" : "left"}>
           Leave a request and our manager will contact you immediately!
@@ -89,7 +97,7 @@ const FormSection = () => {
               formik={formik}
               value={formik.values.locationUp}
               handleChange={(e: any) => formik.setFieldValue("locationUp", e)}
-                />
+            />
           </Box>
           <Box flexBasis={isMobile ? "100%" : ""}>
             <InputLabel className={style.formLabel}>Pick-up date</InputLabel>

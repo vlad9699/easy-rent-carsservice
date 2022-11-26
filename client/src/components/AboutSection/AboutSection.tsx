@@ -84,7 +84,7 @@ const AboutSection = () => {
             - There is no prepayment or cancellation fees.
           </Typography>
           <Typography mb={"8px"}>
-            - We work with the major car rental companies to make sure you will receive only the highest level service,
+            - We work with the major car rental companies to make sure you receive only the highest level service,
             both from the car providers, and our own experienced staff.
           </Typography>
           <Typography>

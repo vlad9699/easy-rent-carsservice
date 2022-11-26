@@ -20,7 +20,7 @@ const TitleSection = () => {
         marginBottom={isMobile ? "8px" : "16px"}
         textAlign={"center"}
       >
-        HURRY UP TO GRAB A CAR WITH A SUPER DISCOUNT UP TO -30%
+        HURRY UP TO GRAB A CAR WITH A SUPER DISCOUNT UP TO -30%!
       </Typography>
       <Typography color={"#ffffff"} fontWeight={500} fontSize={isMobile ? "14px" : "24px"} textAlign={"center"}>
         Renting cars has never been so easy.<br />
