@@ -15,14 +15,14 @@ const SendModal = ({ open, res, handleClose }: SendModalProps) => {
   const renderModalInfo = () => {
     let renderText;
     if (res) {
-      renderText = "Thank you, we will contact you shortly!";
+      renderText = <span id="success_form">Thank you, we will contact you shortly!</span>;
     } else {
       renderText = "Something is wrong, please try again later...";
     }
 
     return (
       <>
-        <img src={whichSmile} alt={"smile"} />
+        <img src={whichSmile} width={"64px"} height={"64px"} alt={"smile"} />
         <Typography fontSize={"24px"} fontWeight={500}>
           {renderText}
         </Typography>
